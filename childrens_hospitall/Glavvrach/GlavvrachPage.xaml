@@ -1,0 +1,33 @@
+﻿<Page x:Class="childrens_hospitall.Glavvrach.GlavvrachPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:childrens_hospitall.Glavvrach"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GlavvrachPage">
+
+    <Grid Background="Azure">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="27*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="5">
+            <Label Content="Гарифуллин Марат Тахирович"  FontSize="17"></Label>
+            <Label Content="Главный врач"></Label>
+            <Button x:Name="staff"  HorizontalAlignment="Left" MinWidth="100" Content="Сотрудники" Click="staff_Click"/>
+            <Button x:Name="branch" HorizontalAlignment="Left" MinWidth="100" Content="Отделения" Click= "branch_Click" ></Button>
+            <Button x:Name="patient" HorizontalAlignment="Left" MinWidth="100" Content="Пациеты" Click= "patient_Click" ></Button>
+            <Button x:Name="Bdck" HorizontalAlignment="Left" MinWidth="100" Content="Выход" Click="Bdck_Click" ></Button>
+
+        </StackPanel>
+       
+    </Grid>
+</Page>

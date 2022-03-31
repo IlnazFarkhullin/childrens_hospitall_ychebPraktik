@@ -1,0 +1,30 @@
+﻿<Page x:Class="childrens_hospitall.NewFolder1.Position"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:childrens_hospitall.NewFolder1"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Position">
+
+    <Grid Background="Azure">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListView  Margin="0,10,10,0" x:Name="position" SelectionChanged="position_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" DisplayMemberBinding ="{Binding id_position }"  Width="auto"/>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding ="{Binding name}"  Width="auto"/>
+                    <GridViewColumn Header="Зарплата" DisplayMemberBinding ="{Binding salary}"  Width="auto"/>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+         <Button x:Name="r_btn" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10.2,0,100.6" Content="Удалить" Click="r_btn_Click"></Button>
+        <Button x:Name="a_btn"  Grid.Row="1" HorizontalAlignment="Left" Content="Добавить" Click="a_btn_Click" Margin="10,61.2,0,49.6"></Button>
+        <Button x:Name="Back_page"  Grid.Row="1" HorizontalAlignment="Left" Margin="10,101,0,10" Content="Назад" Click="Back_page_Click"></Button>
+    </Grid>
+</Page>

@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище childrens_hospitalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="id_branches" />
+          </Key>
+          <Property Name="id_branches" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="head_department" Type="int" />
+        </EntityType>
+        <EntityType Name="login_data">
+          <Key>
+            <PropertyRef Name="id_login_date" />
+          </Key>
+          <Property Name="id_login_date" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passworsd" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id_patient" />
+          </Key>
+          <Property Name="id_patient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sname" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="hp" Type="date" />
+          <Property Name="age" Type="int" />
+          <Property Name="diagnosis" Type="varchar" MaxLength="50" />
+          <Property Name="id_branches" Type="int" />
+          <Property Name="id_ward" Type="int" />
+          <Property Name="id_staff" Type="int" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="salary" Type="int" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id_staff" />
+          </Key>
+          <Property Name="id_staff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fname" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="speciality" Type="varchar" MaxLength="50" />
+          <Property Name="name_speciality" Type="varchar" MaxLength="50" />
+          <Property Name="name_kvalivication" Type="varchar" MaxLength="50" />
+          <Property Name="id_position" Type="int" />
+          <Property Name="id_diplom" Type="int" />
+          <Property Name="staj" Type="int" />
+          <Property Name="id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_login_date" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ward">
+          <Key>
+            <PropertyRef Name="id_ward" />
+          </Key>
+          <Property Name="id_ward" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" />
+        </EntityType>
+        <Association Name="FK_Patient_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="id_branches" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="id_branches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="id_staff" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Ward">
+          <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ward">
+              <PropertyRef Name="id_ward" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="id_ward" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_login_data">
+          <End Role="login_data" Type="Self.login_data" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login_data">
+              <PropertyRef Name="id_login_date" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="id_login_date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище childrens_hospitalModelContainer">
+          <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login_data" EntityType="Self.login_data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Patient_Branches" Association="Self.FK_Patient_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Staff" Association="Self.FK_Patient_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Ward" Association="Self.FK_Patient_Ward">
+            <End Role="Ward" EntitySet="Ward" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Position" Association="Self.FK_Staff_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_user" Association="Self.FK_Staff_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_login_data" Association="Self.FK_user_login_data">
+            <End Role="login_data" EntitySet="login_data" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="childrens_hospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="id_branches" />
+          </Key>
+          <Property Name="id_branches" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="head_department" Type="Int32" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Branches" FromRole="Branches" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="login_data">
+          <Key>
+            <PropertyRef Name="id_login_date" />
+          </Key>
+          <Property Name="id_login_date" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passworsd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_login_data" FromRole="login_data" ToRole="user" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id_patient" />
+          </Key>
+          <Property Name="id_patient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="hp" Type="DateTime" Precision="0" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="diagnosis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_branches" Type="Int32" />
+          <Property Name="id_ward" Type="Int32" />
+          <Property Name="id_staff" Type="Int32" />
+          <NavigationProperty Name="Branches" Relationship="Self.FK_Patient_Branches" FromRole="Patient" ToRole="Branches" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Patient_Staff" FromRole="Patient" ToRole="Staff" />
+          <NavigationProperty Name="Ward" Relationship="Self.FK_Patient_Ward" FromRole="Patient" ToRole="Ward" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Position" FromRole="Position" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id_staff" />
+          </Key>
+          <Property Name="id_staff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="speciality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name_speciality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name_kvalivication" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_position" Type="Int32" />
+          <Property Name="id_diplom" Type="Int32" />
+          <Property Name="staj" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Staff" FromRole="Staff" ToRole="Patient" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Staff_Position" FromRole="Staff" ToRole="Position" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Staff_user" FromRole="Staff" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_login_date" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="login_data" Relationship="Self.FK_user_login_data" FromRole="user" ToRole="login_data" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_user" FromRole="user" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Ward">
+          <Key>
+            <PropertyRef Name="id_ward" />
+          </Key>
+          <Property Name="id_ward" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="Int32" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Ward" FromRole="Ward" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_Patient_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="id_branches" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="id_branches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_login_data">
+          <End Role="login_data" Type="Self.login_data" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login_data">
+              <PropertyRef Name="id_login_date" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="id_login_date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="id_staff" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Ward">
+          <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ward">
+              <PropertyRef Name="id_ward" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="id_ward" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="childrens_hospitalEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Branches" EntityType="Self.Branches" />
+          <EntitySet Name="login_data" EntityType="Self.login_data" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="Ward" EntityType="Self.Ward" />
+          <AssociationSet Name="FK_Patient_Branches" Association="Self.FK_Patient_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_login_data" Association="Self.FK_user_login_data">
+            <End Role="login_data" EntitySet="login_data" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Staff" Association="Self.FK_Patient_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Ward" Association="Self.FK_Patient_Ward">
+            <End Role="Ward" EntitySet="Ward" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Position" Association="Self.FK_Staff_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_user" Association="Self.FK_Staff_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище childrens_hospitalModelContainer" CdmEntityContainer="childrens_hospitalEntities1">
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.Branches">
+              <MappingFragment StoreEntitySet="Branches">
+                <ScalarProperty Name="id_branches" ColumnName="id_branches" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="head_department" ColumnName="head_department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login_data">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.login_data">
+              <MappingFragment StoreEntitySet="login_data">
+                <ScalarProperty Name="id_login_date" ColumnName="id_login_date" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="passworsd" ColumnName="passworsd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="id_patient" ColumnName="id_patient" />
+                <ScalarProperty Name="sname" ColumnName="sname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="hp" ColumnName="hp" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
+                <ScalarProperty Name="id_branches" ColumnName="id_branches" />
+                <ScalarProperty Name="id_ward" ColumnName="id_ward" />
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="speciality" ColumnName="speciality" />
+                <ScalarProperty Name="name_speciality" ColumnName="name_speciality" />
+                <ScalarProperty Name="name_kvalivication" ColumnName="name_kvalivication" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="id_diplom" ColumnName="id_diplom" />
+                <ScalarProperty Name="staj" ColumnName="staj" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_login_date" ColumnName="id_login_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ward">
+            <EntityTypeMapping TypeName="childrens_hospitalModel.Ward">
+              <MappingFragment StoreEntitySet="Ward">
+                <ScalarProperty Name="id_ward" ColumnName="id_ward" />
+                <ScalarProperty Name="number" ColumnName="number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

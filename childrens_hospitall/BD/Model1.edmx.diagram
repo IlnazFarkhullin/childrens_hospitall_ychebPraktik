@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7f27b2365d9343bb9f16f56e6df93c49" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="childrens_hospitalModel.Branches" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="childrens_hospitalModel.login_data" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="childrens_hospitalModel.Patient" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="childrens_hospitalModel.Position" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="childrens_hospitalModel.Staff" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="childrens_hospitalModel.user" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="childrens_hospitalModel.Ward" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="childrens_hospitalModel.FK_Patient_Branches" ManuallyRouted="false" />
+        <AssociationConnector Association="childrens_hospitalModel.FK_user_login_data" ManuallyRouted="false" />
+        <AssociationConnector Association="childrens_hospitalModel.FK_Patient_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="childrens_hospitalModel.FK_Patient_Ward" ManuallyRouted="false" />
+        <AssociationConnector Association="childrens_hospitalModel.FK_Staff_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="childrens_hospitalModel.FK_Staff_user" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
